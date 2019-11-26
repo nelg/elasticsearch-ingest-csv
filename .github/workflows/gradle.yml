@@ -15,9 +15,10 @@ jobs:
         java-version: 12
     - name: Build with Gradle
       run: ./gradlew clean check
-    - name: Upload the binary
-      uses: skx/github-action-publish-binaries@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
       with:
-        args: 'build/distributions/ingest-csv*.zip'
+        # Artifact name
+        name: ingest-csv
+        # Directory containing files to upload
+        path: build/distributions
