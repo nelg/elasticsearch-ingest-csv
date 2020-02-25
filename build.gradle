@@ -1,7 +1,3 @@
-//workaround for 7.5.0. see https://github.com/elastic/elasticsearch/issues/49787
-import org.elasticsearch.gradle.testclusters.TestClustersRegistry
-import org.elasticsearch.gradle.testclusters.TestClustersPlugin
-
 buildscript {
   repositories {
     mavenLocal()
@@ -51,9 +47,3 @@ thirdPartyAudit.enabled = false
 if (gradle.startParameter.taskNames.contains('uploadArchives')) {
   apply from: 'uploadArchives.gradle'
 }
-
-//workaround for 7.5.1. see https://github.com/elastic/elasticsearch/issues/49787
-TestClustersRegistry registry = project.rootProject.extensions.create("testClustersRegistry", TestClustersRegistry)
-TestClustersPlugin.configureClaimClustersHook(project.gradle, registry)
-TestClustersPlugin.configureStartClustersHook(project.gradle, registry)
-TestClustersPlugin.configureStopClustersHook(project.gradle, registry)
